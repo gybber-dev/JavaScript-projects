@@ -3,6 +3,8 @@ import Cell from './Cell/Cell'
 /*
     input: field size (3x3) is {width: 3, heght: 3}
 */
+console.log('run Field');
+
 const Field = props=>{
     console.log('Field', props);
 
@@ -15,7 +17,6 @@ const Field = props=>{
         for (let i = 0; i < size.height; i++) {
             result.push (
                 <div key = {i} style={divStyle}>
-                    {console.log(drawRaw(size.width))}
                     {drawRaw(size.width)}
                 </div>
             )            

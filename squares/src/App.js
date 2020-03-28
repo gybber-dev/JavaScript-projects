@@ -2,8 +2,9 @@ import React from 'react';
 // import logo from './logo.svg';
 import './App.css';
 import Field from './Field/Field';
+import PlayerMenu from './PlayerMenu/PlayerMenu';
 // import Counter from './Counter/Counter'
-
+console.log('run App');
 
 function App() {
   const size = {width: 10, height: 10}
@@ -21,7 +22,7 @@ function App() {
       >
           {Field({size})}
       </div>
-      <div
+      <div className={'sidebar'}
         style={{display:'table-cell'}}
       >
         <div
@@ -32,7 +33,9 @@ function App() {
         <div
           style={{display:'table-row'}}
         >
-          {'Player menu'}
+          {PlayerMenu({
+            player:{}
+          })}
         </div>
       </div>
       <div
