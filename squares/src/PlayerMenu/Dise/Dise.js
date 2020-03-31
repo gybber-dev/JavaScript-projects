@@ -1,4 +1,4 @@
-// выдаёт 2 случайных числа от 1 до 6
+
 import React from 'react';
 console.log('run Dice');
 

@@ -16,7 +16,7 @@ const PlayerMenu = (props)=>{
     return (
         <div>   
             {console.log('rendering...')}
-            <button onClick={()=>{setInfo(Dice())}}>Бросить кости</button>
+            <button className='btn btn-outline-secondary' onClick={()=>{setInfo(Dice())}}>Бросить кости</button>
             {info}
         </div>
     )

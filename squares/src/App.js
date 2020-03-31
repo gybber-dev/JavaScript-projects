@@ -1,26 +1,36 @@
-import React from 'react';
+import React, { useState } from 'react';
 // import logo from './logo.svg';
 import './App.css';
 import Field from './Field/Field';
 import PlayerMenu from './PlayerMenu/PlayerMenu';
+import cover from './Field/cover/cover'
 // import Counter from './Counter/Counter'
-console.log('run App');
 
 function App() {
-  const size = {width: 10, height: 10}
+  console.log('run App');
+  let propObj = {
+    elem: null,
+    size: {width: 15, height: 10},
+    rect: null,
+    field: null
+  }
+  // let obj = {a: 1};
+  // console.log(Object.assign(obj, {a:2}))
+  const [field, setField] = useState(Field(propObj));
   return (
     <div className="App">
       <header className="App-header">
         Square game
       </header>
-      {/* <div>
-        {Counter()}
-      </div> */}
       <div
         style={{display:'table-cell'}}
-        onClick={(e)=>{console.log(e.target)}}
+        onClick={
+          (e)=>{setField( Field(Object.assign(propObj, {elem: e.target})) )}
+        }
       >
-          {Field({size})}
+        {field}
+        {console.log(field)}
+        {/* {Field({size})} */}
       </div>
       <div className={'sidebar'}
         style={{display:'table-cell'}}

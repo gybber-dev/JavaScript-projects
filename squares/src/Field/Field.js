@@ -7,25 +7,25 @@ console.log('run Field');
 
 const Field = props=>{
     console.log('Field', props);
-
+    if (props.elem) props.size.width = 5;
     // table view:
     const drawTable = size => {
         const result = [];
         const divStyle = {
             display: 'table-cell'
           };
-        for (let i = 0; i < size.height; i++) {
+        for (let i = 0; i < size.width; i++) {
             result.push (
                 <div key = {i} style={divStyle}>
-                    {drawRaw(size.width)}
+                    {drawCol(size.height)}
                 </div>
             )            
         }
         return result;
     }
-    const drawRaw = width => {
+    const drawCol = height => {
         const result = [];
-        for (let i = 1; i <= width; i++) {
+        for (let i = 1; i <= height; i++) {
             result.push (
                 <div key = {i}>
                     {Cell()}

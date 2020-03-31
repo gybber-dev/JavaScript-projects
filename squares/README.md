@@ -1,5 +1,5 @@
 # Игра КВАДРАТЫ
-<!-- Sqare (1. Readme Added /2) -->
+<!-- Square (3. Bootstrap added) -->
 
 Правила Игры:  
 <!-- ![Image](./img/subscribe.jpg) -->
