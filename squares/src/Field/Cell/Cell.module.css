@@ -8,6 +8,6 @@
     vertical-align: middle;
 }
 
-.red {
-    border: 2px solid red;
+.enable {
+    background-color: rgb(174, 247, 91);
 }

@@ -6,54 +6,58 @@ import Cell from './Cell/Cell'
 console.log('run Field');
 
 const Field = props=>{
+    const showEnableCells = true;
+    let enableCells = {};
+    // 1st round
+    if (props.isFirst){
+        enableCells[props.size.height+'x'+props.size.width] = true;
+        enableCells['1x1'] = true;
+        enableCells[props.size.height+'x1'] = true;
+        enableCells['1x'+props.size.width] = true;
+    }
+
+    
+
+    console.log('enableCells',enableCells);
     console.log('Field', props);
-    if (props.elem) props.size.width = 5;
+    if (props.elem) {
+        console.log(props.elem);
+        console.log(props.elem.key);
+        console.log(props.elem.parentNode);
+    }
+
     // table view:
-    const drawTable = size => {
+    const drawTable = size  => {
         const result = [];
         const divStyle = {
-            display: 'table-cell'
+            display: 'table-row'
           };
-        for (let i = 0; i < size.width; i++) {
+        for (let row = 1; row <= size.height; row++) {
             result.push (
-                <div key = {i} style={divStyle}>
-                    {drawCol(size.height)}
+                <div key = {row} style={divStyle}>
+                    {drawRow(size.width, row)}
                 </div>
             )            
         }
         return result;
     }
-    const drawCol = height => {
+    function drawRow (width, row) {
         const result = [];
-        for (let i = 1; i <= height; i++) {
+        let id;
+        for (let col = 1; col <= width; col++) {
+            id = row+'x'+col;
+            // console.log('isIt?', id, enableCells[id])
             result.push (
-                <div key = {i}>
-                    {Cell()}
-                </div>
+                    <Cell 
+                        key={id} 
+                        id={id}
+                        enable = {enableCells[id]? true: false}
+                        showEnableCells = {showEnableCells}
+                    />
             )
         }
         return result
     }
-    return drawTable( props.size )
-
-    // block view:
-    // const drawTable = size => {
-    //     const result = [];
-    //     for (let index = 0; index < size.height; index++) {
-    //         result.push ( drawRaw(index, size.width) )
-    //         result.push ( <br key={ index*size.width+size.width+1 }/> )            
-    //     }
-    //     return result;
-    // }
-    // const drawRaw = (row, width) => {
-    //     const result = [];
-    //     for (let i = 1; i <= width; i++) {
-    //         result.push( Cell( row*(width+1)+i) )
-    //     }
-    //     return result
-    // }
-
-    // return drawTable(props.size)
-
+    return drawTable( props.size, showEnableCells )
 }
 export default Field

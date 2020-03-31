@@ -12,7 +12,8 @@ function App() {
     elem: null,
     size: {width: 15, height: 10},
     rect: null,
-    field: null
+    field: null,
+    isFirst: true
   }
   // let obj = {a: 1};
   // console.log(Object.assign(obj, {a:2}))
@@ -25,7 +26,7 @@ function App() {
       <div
         style={{display:'table-cell'}}
         onClick={
-          (e)=>{setField( Field(Object.assign(propObj, {elem: e.target})) )}
+          (e)=>{setField( Field(Object.assign(propObj, {elem: e.target}, {rect: [3, 2]})) )}
         }
       >
         {field}

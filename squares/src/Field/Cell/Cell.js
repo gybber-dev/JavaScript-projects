@@ -2,17 +2,19 @@ import React from 'react';
 import classes from './Cell.module.css' // just add '.module' in .css-file name
 console.log('run Cell');
 
-const Cell = id =>{
-
+const Cell = props =>{
+    console.log('Cell', props)
+    
     const cellClasses = [classes.cell];
     
-    cellClasses.push(classes.red);
+    if (props.enable) cellClasses.push(classes.enable)
+    // cellClasses.push(classes);
 
-
+    console.log('join', cellClasses.join(' '))
     
     
     return (
-        <div key={id} className={classes.cell} />
+        <div key={props} id={props.id} className={cellClasses.join(' ')} />
     )
 }
 export default Cell
