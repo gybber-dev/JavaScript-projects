@@ -9,5 +9,9 @@
 }
 
 .enable {
-    background-color: rgb(174, 247, 91);
+    border: 6px solid rgb(233, 203, 73);
+}
+
+.current{
+    background-color: rgb(170, 170, 170);
 }

@@ -1,5 +1,6 @@
 import React from 'react';
 import Cell from './Cell/Cell'
+import findRects from './findRects'
 /*
     input: field size (3x3) is {width: 3, heght: 3}
 */
@@ -7,7 +8,10 @@ console.log('run Field');
 
 const Field = props=>{
     const showEnableCells = true;
-    let enableCells = {};
+
+    let enableCells = {}; // ячейки, куда можно ставить квадрат
+    let coveredCells = {}; // занятые ячейки
+    let currentCells = {}; // текущие ячейки
     // 1st round
     if (props.isFirst){
         enableCells[props.size.height+'x'+props.size.width] = true;
@@ -16,7 +20,10 @@ const Field = props=>{
         enableCells['1x'+props.size.width] = true;
     }
 
-    
+    if (props.rect && props.elem) {
+        const rectsArr = findRects(props);
+        if (rectsArr.length) currentCells = rectsArr[props.clickCounter % rectsArr.length].squares
+    }
 
     console.log('enableCells',enableCells);
     console.log('Field', props);
@@ -41,17 +48,19 @@ const Field = props=>{
         }
         return result;
     }
-    function drawRow (width, row) {
+    function drawRow (X, Y) {
         const result = [];
         let id;
-        for (let col = 1; col <= width; col++) {
-            id = row+'x'+col;
+        for (let col = 1; col <= X; col++) {
+            id = Y+'x'+col;
             // console.log('isIt?', id, enableCells[id])
             result.push (
                     <Cell 
                         key={id} 
                         id={id}
                         enable = {enableCells[id]? true: false}
+                        covered = {coveredCells[id]? true: false}
+                        current = {currentCells[id]? true : false}
                         showEnableCells = {showEnableCells}
                     />
             )

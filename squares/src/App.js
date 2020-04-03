@@ -3,21 +3,32 @@ import React, { useState } from 'react';
 import './App.css';
 import Field from './Field/Field';
 import PlayerMenu from './PlayerMenu/PlayerMenu';
-import cover from './Field/cover/cover'
+// import cover from './Field/cover/cover'
 // import Counter from './Counter/Counter'
 
 function App() {
   console.log('run App');
+  
+  let [counter, setCounter] = useState(0);
+
   let propObj = {
     elem: null,
     size: {width: 15, height: 10},
     rect: null,
+    clickCounter: 0,
     field: null,
     isFirst: true
   }
+  
+  // let [propObj, setPropObj] = useState(
+  //   Object.assign(propPattern, {clickCounter: ++propObj.clickCounter})
+  // );
+
   // let obj = {a: 1};
   // console.log(Object.assign(obj, {a:2}))
   const [field, setField] = useState(Field(propObj));
+
+
   return (
     <div className="App">
       <header className="App-header">
@@ -26,11 +37,21 @@ function App() {
       <div
         style={{display:'table-cell'}}
         onClick={
-          (e)=>{setField( Field(Object.assign(propObj, {elem: e.target}, {rect: [3, 2]})) )}
+          (e)=>{
+            setCounter( counter + 1 )
+            setField( 
+              Field(Object.assign(
+                propObj, 
+                {elem: e.target}, 
+                {rect: [3, 2]}, 
+                {clickCounter: counter}
+              )) 
+            )
+          }
         }
       >
         {field}
-        {console.log(field)}
+        {/* {console.log(field)} */}
         {/* {Field({size})} */}
       </div>
       <div className={'sidebar'}
