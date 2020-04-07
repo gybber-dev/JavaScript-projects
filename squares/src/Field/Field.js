@@ -1,37 +1,37 @@
 import React from 'react';
-import Cell from './Cell/Cell'
+import Cell from './Cell'
 import findRects from './findRects'
-import classes from './Cell/Cell.module.css'
+import classes from './Cell.module.css'
+import PropTypes from 'prop-types'
 /*
     input: field size (3x3) is {width: 3, heght: 3}
 */
 console.log('run Field');
 
-const Field = props=>{
-    const showEnableCells = true;
 
+const Field = ({cellID, size, rect, clickCounter, isFirst}) =>{
+    const showEnableCells = true;
+    console.log(' Field', clickCounter);
     let enableCells = {}; // ячейки, куда можно ставить квадрат
     let coveredCells = {}; // занятые ячейки
     let currentCells = {}; // текущие ячейки
     // 1st round
-    if (props.isFirst){
-        enableCells[props.size.height+'x'+props.size.width] = true;
+    if (isFirst){
+        enableCells[size.height+'x'+size.width] = true;
         enableCells['1x1'] = true;
-        enableCells[props.size.height+'x1'] = true;
-        enableCells['1x'+props.size.width] = true;
+        enableCells[size.height+'x1'] = true;
+        enableCells['1x'+size.width] = true;
     }
 
-    if (props.rect && props.elem) {
-        const rectsArr = findRects(props);
-        if (rectsArr.length) currentCells = rectsArr[props.clickCounter % rectsArr.length].squares
+    if (rect && cellID) {
+        const rectsArr = findRects(null);
+        if (rectsArr.length) currentCells = rectsArr[clickCounter % rectsArr.length].squares
     }
 
     console.log('enableCells',enableCells);
-    console.log('Field', props);
-    if (props.elem) {
-        console.log(props.elem);
-        console.log(props.elem.key);
-        console.log(props.elem.parentNode);
+    console.log('Field');
+    if (cellID) {
+        console.log(cellID);
     }
 
     // table view:
@@ -75,9 +75,25 @@ const Field = props=>{
     }
     return (
         // <div className='container'>
-            drawTable( props.size, showEnableCells )
+            drawTable( size, showEnableCells )
         // </div>
     )
 
+}
+
+Field.propTypes = {
+    cellID: PropTypes.string,
+    size: PropTypes.object,
+    rect: PropTypes.array,
+    clickCounter: PropTypes.number,
+    isFirst: PropTypes.bool,
+}
+
+Field.defaultProps = {
+    cellID: '',
+    size: {width: 15, height: 10},
+    rect: [0, 0],
+    clickCounter: 0,
+    isFirst: true,
 }
 export default Field

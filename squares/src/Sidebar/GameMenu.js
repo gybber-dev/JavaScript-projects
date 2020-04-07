@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
-import classes from './MainMenu.module.css'
-
+import classes from './Sidebar.module.css'
 // import Modal from '../plugins/modal/index'
-console.log('run MainMenu');
+console.log('run GameMenu');
 
 
 const connectGame = newGame => {
@@ -38,13 +37,13 @@ const connectGame = newGame => {
 };
 
 
-const MainMenu = props =>{
-    const panelClasses = [classes.main];
+const GameMenu = props =>{
+    const panelClasses = [classes.panel];
     const buttonClasses = []
     // add new class
-    panelClasses.push(classes.option);
     buttonClasses.push('btn');
     buttonClasses.push('btn-primary');
+    panelClasses.push(classes['panel-game'])
 
 
     const [newGameBlock, setNewGameBlock] = useState('');
@@ -73,5 +72,4 @@ const MainMenu = props =>{
     )
 }
 
-
-export default MainMenu
+export default GameMenu
