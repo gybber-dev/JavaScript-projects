@@ -13,7 +13,7 @@ const dice = generate();
 const Dice = ()=>{
     console.log('Dice rendering...')
     return (
-        <div id={'info'}>
+        <div id={'info'} style={{fontSize: '30px'}}>
             {`Кости брошены: ${dice.d1} и ${dice.d2}`}
         </div>
     )

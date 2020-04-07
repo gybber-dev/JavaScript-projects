@@ -3,7 +3,8 @@ import React, { useState } from 'react';
 import './App.css';
 import Field from './Field/Field';
 import PlayerMenu from './PlayerMenu/PlayerMenu';
-// import cover from './Field/cover/cover'
+import MainMenu from './Sidebar/MainMenu';
+// import modal from './plugins/modal/index.html'
 // import Counter from './Counter/Counter'
 
 function App() {
@@ -13,7 +14,7 @@ function App() {
 
   let propObj = {
     elem: null,
-    size: {width: 15, height: 10},
+    size: {width: 20, height: 10},
     rect: null,
     clickCounter: 0,
     field: null,
@@ -34,46 +35,45 @@ function App() {
       <header className="App-header">
         Square game
       </header>
-      <div
-        style={{display:'table-cell'}}
-        onClick={
-          (e)=>{
-            setCounter( counter + 1 )
-            setField( 
-              Field(Object.assign(
-                propObj, 
-                {elem: e.target}, 
-                {rect: [3, 2]}, 
-                {clickCounter: counter}
-              )) 
-            )
+      <div className='row'>
+        <div className='col-lg-8 col-12'
+          onClick={
+            (e)=>{
+              setCounter( counter + 1 )
+              setField( 
+                Field(Object.assign(
+                  propObj, 
+                  {elem: e.target}, 
+                  {rect: [3, 2]}, 
+                  {clickCounter: counter}
+                )) 
+              )
+            }
           }
-        }
-      >
-        {field}
-        {/* {console.log(field)} */}
-        {/* {Field({size})} */}
-      </div>
-      <div className={'sidebar'}
-        style={{display:'table-cell'}}
-      >
-        <div
-          style={{display:'table-row'}}
         >
-          {'Main menu'}
+          {field}
         </div>
-        <div
-          style={{display:'table-row'}}
+        <div className='col-lg-4 col-12'
+          // style={{display:'table-cell'}}
         >
-          {PlayerMenu({
-            player:{}
-          })}
+          <MainMenu />
+          <div
+            style={{display:'table-row'}}
+          >
+            {PlayerMenu({
+              player:{}
+            })}
+          </div>
         </div>
       </div>
       <div
-        style={{display:'table-row'}}
+        className='row'
       >
-        {'bottom'}
+        <div
+            className='col'
+          >
+            {'bottom'}
+          </div>
       </div>
     </div>
   );

@@ -5,9 +5,9 @@ console.log('run Cell');
 const Cell = props =>{
     // console.log('Cell', props)
     
-    const cellClasses = [classes.cell];
+    const cellClasses = [classes.cell, 'border'];
     
-    if (props.enable && props.showEnableCells) cellClasses.push(classes.enable)
+    if (props.enable && props.showEnableCells) cellClasses.push('border-warning')
     if (props.current) cellClasses.push(classes.current)
     // cellClasses.push(classes);
 

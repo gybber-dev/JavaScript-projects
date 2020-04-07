@@ -1,6 +1,7 @@
 import React from 'react';
 import Cell from './Cell/Cell'
 import findRects from './findRects'
+import classes from './Cell/Cell.module.css'
 /*
     input: field size (3x3) is {width: 3, heght: 3}
 */
@@ -36,13 +37,18 @@ const Field = props=>{
     // table view:
     const drawTable = size  => {
         const result = [];
-        const divStyle = {
-            display: 'table-row'
-          };
+        const cellClasses = [classes['flex-container']];
+        
+        
         for (let row = 1; row <= size.height; row++) {
             result.push (
-                <div key = {row} style={divStyle}>
+                <div key = {row} 
+                    // style={divStyle}
+                    className={cellClasses.join(' ')}
+                    /* className={'row-cols-'+size.width} */
+                    >
                     {drawRow(size.width, row)}
+
                 </div>
             )            
         }
@@ -67,6 +73,11 @@ const Field = props=>{
         }
         return result
     }
-    return drawTable( props.size, showEnableCells )
+    return (
+        // <div className='container'>
+            drawTable( props.size, showEnableCells )
+        // </div>
+    )
+
 }
 export default Field
