@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
-// import logo from './logo.svg';
+
 import './App.css';
 import Field from './Field/Field';
 import Sidebar from './Sidebar/Sidebar';
 // import modal from './plugins/modal/index.html'
 // import Counter from './Counter/Counter'
 
+
 function App() {
   console.log('run App');
+  
   
   const [counter, setCounter] = useState(0);
 

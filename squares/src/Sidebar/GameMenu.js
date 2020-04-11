@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import classes from './Sidebar.module.css'
+import * as firebase from 'firebase'
 // import Modal from '../plugins/modal/index'
 console.log('run GameMenu');
 
@@ -48,6 +49,19 @@ const GameMenu = props =>{
 
     const [newGameBlock, setNewGameBlock] = useState('');
 
+    const handleNewGame = ()=>{
+        console.log('handleNewGame');
+        const rootRef = firebase.database().ref().child('react');
+        const speedRef = rootRef.child('speed');
+        speedRef.once('value').then(function(snapshot) {
+            console.log(snapshot.val())
+            // ...
+          });
+        // speedRef.on('value', snap => {
+        //     console.log(snap.val())
+        //   })
+    }
+
     return (
         <div className={panelClasses.join(' ')}>
 
@@ -55,7 +69,7 @@ const GameMenu = props =>{
                 className={buttonClasses.join(' ')} 
                 data-toggle="modal"
                 data-target="#exampleModal"
-                onClick={()=>{setNewGameBlock(connectGame(true))}}>
+                onClick={handleNewGame}>
                     New Game
             </button>
 

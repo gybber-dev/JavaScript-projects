@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import Cell from './Cell'
 import findRects from './findRects'
 import classes from './Cell.module.css'
@@ -7,6 +7,10 @@ import PropTypes from 'prop-types'
     input: field size (3x3) is {width: 3, heght: 3}
 */
 console.log('run Field');
+
+/*
+    !!!!!                             НЕ ТРОГАЙ НИЧЕГО ПОКА НЕ ОПРЕДЕЛИШЬСЯ С ПРОПИСАМИ                     !!!!!
+*/
 
 
 const Field = ({cellID, size, rect, clickCounter, isFirst}) =>{
@@ -28,27 +32,51 @@ const Field = ({cellID, size, rect, clickCounter, isFirst}) =>{
         if (rectsArr.length) currentCells = rectsArr[clickCounter % rectsArr.length].squares
     }
 
-    console.log('enableCells',enableCells);
-    console.log('Field');
     if (cellID) {
         console.log(cellID);
     }
 
-    // table view:
+
+
+
+    const drawTable = ({width, height}, showEnableCells)  => {
+        // const result = [];
+        const rows = Array.from(new Array(height));
+        const cols = Array.from(new Array(width));
+
+        const table = (
+            rows.map((el, y) => {
+                return (
+                    <div key = {`row-${y}`} className={classes['flex-container']}>
+                    {cols.map((el, x) => {
+                        let id = `${y+1}x${x+1}`;
+                        return (
+                        <Cell 
+                            key={id} 
+                            id={id}
+                            enable = {enableCells[id]? true: false}
+                            covered = {coveredCells[id]? true: false}
+                            current = {currentCells[id]? true : false}
+                            showEnableCells = {showEnableCells}
+                        />
+                    )})}
+                    </div>)
+                
+            })
+        )
+        return table
+
+    }
+
+    return ( drawTable(size, showEnableCells) )
+    /*
     const drawTable = size  => {
         const result = [];
-        const cellClasses = [classes['flex-container']];
-        
-        
+
         for (let row = 1; row <= size.height; row++) {
             result.push (
-                <div key = {row} 
-                    // style={divStyle}
-                    className={cellClasses.join(' ')}
-                    /* className={'row-cols-'+size.width} */
-                    >
+                <div key = {row} className={classes['flex-container']}>
                     {drawRow(size.width, row)}
-
                 </div>
             )            
         }
@@ -73,11 +101,9 @@ const Field = ({cellID, size, rect, clickCounter, isFirst}) =>{
         }
         return result
     }
-    return (
-        // <div className='container'>
-            drawTable( size, showEnableCells )
-        // </div>
-    )
+    return ( drawTable(size, showEnableCells) )
+    */
+    
 
 }
 
