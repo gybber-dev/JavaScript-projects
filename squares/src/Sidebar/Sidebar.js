@@ -1,7 +1,7 @@
 import React from 'react';
 import classes from './Sidebar.module.css'
 import PlayerMenu from './PlayerMenu';
-import GameMenu from './GameMenu'
+// import GameMenu from './GameMenu'
 
 
 
@@ -11,7 +11,7 @@ const Sidebar = ()=>{
 
     return (
         <div className={panelClasses.join(' ')}>
-            <GameMenu />
+            {/* <GameMenu /> */}
             <PlayerMenu />
         </div>
     )

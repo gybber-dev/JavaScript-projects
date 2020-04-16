@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import Cell from './Cell'
 import findRects from './findRects'
 import classes from './Cell.module.css'
