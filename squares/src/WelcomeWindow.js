@@ -8,9 +8,34 @@ import dbAPI from './firebaseAPI'
 
 console.log('run welcomeWindow');
 
-const GamesList = ()=>{
+const GamesList = ({roomsList})=>{
+    
+    console.log('roomsList', roomsList)
+    const Rooms = ()=>roomsList.map((room, index)=>{
+        return (
+            <tr key={`room-${index}`} >
+                <th scope="row">{index}</th>
+                <td>{room.name}</td>
+                <td>{room.users.length}</td>
+                <td>{room.status? 'started' : 'waiting...'}</td>
+            </tr>
+        )
+    });
+
     return (
-        <div>List</div>
+        <table className="table table-hover table-dark">
+            <thead>
+                <tr>
+                <th scope="col">#</th>
+                <th scope="col">Комната</th>
+                <th scope="col">Игроков</th>
+                <th scope="col">Статус</th>
+                </tr>
+            </thead>
+            <tbody>
+                <Rooms />
+            </tbody>
+        </table>
     )
 }
 
@@ -19,12 +44,13 @@ const WelcomeWindow = ({currentUserName}) =>{
     const [showModal, setShowModal] = useState(false);
     const [userName, setUserName] = useState(currentUserName);
     const [inputName, setInputName] = useState(''); // для сохранения строки ввода имени в переменную
-
+    const [roomsList, setRoomsList] = useState([])
+    
     useEffect(()=>{
         console.log('effect userName', userName);
         if (!userName) return;
         localStorage.setItem('userName', userName)
-        dbAPI.userInit(userName)
+        dbAPI.setUser(userName)
     }, [userName])
 
     useEffect(()=>{
@@ -58,12 +84,16 @@ const WelcomeWindow = ({currentUserName}) =>{
     const handleChange = ({target: { value }}) => {
         setInputName(value)
     }
-    
+
+    const handleTest = async ()=>{
+        let rooms = await dbAPI.read()
+        console.log('rooms', rooms)
+    }    
     return (
-        <div className={classes['App-body']} style={{textAlign: 'center'}}>
+        <div className={classes['App-body', 'container']} style={{textAlign: 'center'}}>
             
-            <div>{userName + (userName? '! ': '') + `Приветствую Вас на игре 'Квадраты'`}</div>
-            <GamesList games={'! put list form FB here'}/>
+            <h1 className='display-4'>{userName + (userName? '! ': '') + `Приветствую Вас в игре 'Квадраты'`}</h1>
+            <GamesList roomsList={roomsList}/>
             <button 
                 className={buttonClasses.join(' ')} 
                 onClick={handleNewGame}>
@@ -72,8 +102,8 @@ const WelcomeWindow = ({currentUserName}) =>{
 
             <button 
                 className={buttonClasses.join(' ')} 
-                onClick={handleNewGame}>
-                    Join Game
+                onClick={handleTest}>
+                    Update
             </button>
             <Modal
                 title="Test Dialog window"

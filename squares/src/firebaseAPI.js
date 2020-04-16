@@ -16,23 +16,37 @@ firebase.initializeApp(firebaseConfig);
 
 class DatabaseAPI {
     constructor() {
-        this.rootRef = firebase.database().ref()
+        this.rootRef = firebase.database().ref();
+        this.result = undefined;
     }
     write (data){
         console.log('Writing user to FB...', data)
-        this.rootRef.child('games').set(data)
+        this.rootRef.child('rooms').set(data)
     }
+    // returns Promise
     read () {
-        console.log('Read data from FB...');
-        this.rootRef.child('games').once('value').then(function(snapshot) {
-            return snapshot.val()
-          });
+            console.log('Read data from FB...');
+            return this.rootRef.child('rooms').once('value').then(function(snapshot) {
+                let result = snapshot.val();
+                console.log('result', result)
+                return result
+            });
+        }
+
+
+    readAsync () {
+        let af = async ()=>{
+            let result = 'test'
+            console.log('result1', result)
+            return result 
+        }
+        return af()
         // this.rootRef.child('games').once('value', snap => {
         //     console.log(snap.val())
         //   })
     }
 
-    userInit (userName) {
+    setUser (userName) {
         // from here: https://firebase.google.com/docs/firestore/solutions/presence
         if (!userName) return;
         var userStatusDatabaseRef = this.rootRef.child('users/'+userName);
@@ -58,6 +72,39 @@ class DatabaseAPI {
                 userStatusDatabaseRef.set(isOnlineForDatabase);
             });
         });
+    }
+
+    getRooms () {
+        return async ()=>{
+
+            const roomPattern = {
+                name: 'defaultRoom',
+                users: ['player1', 'player2'],
+                status: false
+            }
+            let rooms = await this.read();
+            return Object.values(rooms)
+        }
+    }
+    getRooms2(){
+        console.log ('final', this.readAsync())
+        
+    }
+
+    getRooms1(){
+
+        setTimeout(()=>{
+            let result = 'boom'
+            console.log(result)
+        }, 2000)
+
+
+        // const roomPattern = {
+        //     name: 'defaultRoom',
+        //     users: ['player1', 'player2'],
+        //     status: false
+        // }
+        // this.write({room0: roomPattern})
     }
 
 
