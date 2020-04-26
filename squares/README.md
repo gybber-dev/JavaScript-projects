@@ -1,5 +1,5 @@
 # Игра КВАДРАТЫ
-<!-- Square (Props validation was added /1) -->
+<!-- Square (Rooms list was added /1) -->
 
 Правила Игры:  
 <!-- ![Image](./img/subscribe.jpg) -->

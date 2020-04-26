@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import classes from './App.module.css'
-import Modal from './plugins/modal/Modal'
+import classes from '../App.module.css'
+import Modal from '../../plugins/modal/Modal'
 import PropTypes from 'prop-types';
 // import * as firebase from 'firebase'
-import dbAPI from './firebaseAPI'
+import dbAPI from '../../firebaseAPI'
 
 
 console.log('run welcomeWindow');
@@ -46,20 +46,22 @@ const WelcomeWindow = ({currentUserName}) =>{
     const [inputName, setInputName] = useState(''); // для сохранения строки ввода имени в переменную
     const [roomsList, setRoomsList] = useState([])
     
-    useEffect(()=>{
-        console.log('effect userName', userName);
-        if (!userName) return;
-        localStorage.setItem('userName', userName)
-        dbAPI.setUser(userName)
-    }, [userName])
+    // useEffect(()=>{
+    //     console.log('effect userName', userName);
+    //     if (!userName) return;
+    //     localStorage.setItem('userName', userName)
+    //     dbAPI.setUser(userName)
+    // }, [userName])
 
-    useEffect(()=>{
-        const name = localStorage.getItem('userName'||[])
-        console.log('reborn userName', name);
-        // for clear localStorage activate below strings and run App TWICE:
-        // localStorage.setItem('userName', '')
-        setUserName(name)
-    }, [])
+    // useEffect(()=>{
+    //     const name = localStorage.getItem('userName'||[])
+    //     console.log('reborn userName', name);
+    //     // for clear localStorage activate below strings and run App TWICE:
+    //     // localStorage.setItem('userName', '')
+    //     setUserName(name)
+    // }, [])
+
+
     const buttonClasses = []
     // add new class
     buttonClasses.push('btn');
@@ -77,8 +79,8 @@ const WelcomeWindow = ({currentUserName}) =>{
     }
     
     const handleCancel = () => {
-    console.log('Cancel function!');
-    setShowModal(false)
+        console.log('Cancel function!');
+        setShowModal(false)
     }
 
     const handleChange = ({target: { value }}) => {

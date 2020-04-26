@@ -24,13 +24,13 @@ class DatabaseAPI {
         this.rootRef.child('rooms').set(data)
     }
     // returns Promise
-    read () {
-            console.log('Read data from FB...');
-            return this.rootRef.child('rooms').once('value').then(function(snapshot) {
+    getRooms () {
+        console.log('Read data from FB...');
+        return this.rootRef.child('rooms').once('value').then(function(snapshot) {
                 let result = snapshot.val();
                 console.log('result', result)
                 return result
-            });
+            })
         }
 
 
@@ -74,18 +74,6 @@ class DatabaseAPI {
         });
     }
 
-    getRooms () {
-        return async ()=>{
-
-            const roomPattern = {
-                name: 'defaultRoom',
-                users: ['player1', 'player2'],
-                status: false
-            }
-            let rooms = await this.read();
-            return Object.values(rooms)
-        }
-    }
     getRooms2(){
         console.log ('final', this.readAsync())
         
