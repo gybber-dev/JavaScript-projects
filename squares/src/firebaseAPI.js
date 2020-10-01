@@ -19,9 +19,24 @@ class DatabaseAPI {
         this.rootRef = firebase.database().ref();
         this.result = undefined;
     }
-    write (data){
-        console.log('Writing user to FB...', data)
-        this.rootRef.child('rooms').set(data)
+    setRoom (data){
+        const context = this;
+        console.log('Writing user to FB...', data);
+        this.rootRef.child('rooms').once('value').then(snap=>{
+            let counter = snap.val()? Object.keys(snap.val()).length:0;
+            data = {
+                ...snap.val(),
+                [`room${counter+1}`]: data
+            }
+            console.log(data)
+            return data
+        }).then(
+            (data)=>{
+                console.log('here', data)
+                context.rootRef.child('rooms').set(data)
+            }
+        )
+        // this.rootRef.child('rooms').add(data)
     }
     // returns Promise
     getRooms () {

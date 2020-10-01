@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import classes from './App.module.css'
 import WelcomeWindow from './components/WelcomeDisplay/WelcomeContainer'
-import MainWindow from './components/RoomDisplay/MainWindow'
+import RoomComponent from './components/RoomDisplay/RoomComponent'
 import './App.module.css'
 
 import { createStore } from 'redux';
@@ -18,7 +18,7 @@ function App() {
 
 
   // const [userName, setUserName] = useState(null);
-  const [welcomeDisplay, setWelcomeDisplay] = useState(true);
+  const [welcomeDisplay, setWelcomeDisplay] = useState(false);
   
 
   
@@ -40,7 +40,7 @@ function App() {
           { welcomeDisplay? 
             <WelcomeWindow/>
             :
-            <MainWindow /> }
+            <RoomComponent /> }
         </div>
       </Provider>
   );

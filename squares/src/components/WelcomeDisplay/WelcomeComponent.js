@@ -13,14 +13,14 @@ import dbAPI from '../../firebaseAPI'
 
 console.log('run welcomeWindow');
 
-const WelcomeComponent = ({userName, handleNewGame, modal, roomsList, handleUpdateRoomsList, handleJoinGame, devTool}) =>{
+const WelcomeComponent = ({userName, handleNewGame, nameModal, roomModal, roomsList, handleUpdateRoomsList, handleJoinGame, devTool}) =>{
 
     // const handleTest = async ()=>{
     //     let rooms = await dbAPI.read()
     //     console.log('rooms', rooms)
     // }   
     
-    console.log('modal', modal)
+    console.log('modal', nameModal)
     return (
         <div className={classes['App-body', 'container']} style={{textAlign: 'center'}}>
             
@@ -37,13 +37,24 @@ const WelcomeComponent = ({userName, handleNewGame, modal, roomsList, handleUpda
             />
 
             <Modal
-                title="Test Dialog window"
-                isOpen={modal.modalShown}
-                onCancel={modal.handleCancel}
-                onSubmit={modal.handleSubmit}
+                title={nameModal.title}
+                isOpen={nameModal.modalShown}
+                onCancel={nameModal.handleCancel}
+                onSubmit={nameModal.handleSubmit}
             >
                 <div className="form-inline" style={{justifyContent: 'center'}}>
-                    <input type="text" className="form-control" placeholder="Enter your name" onChange={modal.handleChange} />
+                    <input type="text" className="form-control" placeholder="Enter your name" onChange={nameModal.handleChange} />
+                </div>
+            </Modal>
+
+            <Modal
+                title={roomModal.title}
+                isOpen={roomModal.roomModalShown}
+                onCancel={roomModal.handleCancel}
+                onSubmit={roomModal.handleSubmit}
+            >
+                <div className="form-inline" style={{justifyContent: 'center'}}>
+                    <input type="text" className="form-control" placeholder="Enter your name" onChange={nameModal.handleChange} />
                 </div>
             </Modal>
         </div>
@@ -61,7 +72,7 @@ const GamesList = ({roomsList, handleNewGame, handleUpdateRoomsList, handleJoinG
 
    
     const onNewGame = ()=>{
-        console.log(userName)
+        // console.log(userName)
         handleNewGame()
         // setUserNameAction('test')
     }
@@ -72,12 +83,19 @@ const GamesList = ({roomsList, handleNewGame, handleUpdateRoomsList, handleJoinG
         // setUserNameAction('test')
     }
 
+    const onRoomsClick =({ target })=>{
+        let selectedRoom = target.parentElement.id;
+        if (!selectedRoom) return;
+        handleJoinGame(selectedRoom)
+    };
+
+
     const Rooms = ()=>roomsList.map((room, index)=>{
         return (
-            <tr key={`room-${index}`} >
-                <th scope="row">{index}</th>
+            <tr key={`room-${index}`} id={`room${index}`}>
+                <th scope="row">{index+1}</th>
                 <td>{room.name}</td>
-                <td>{room.users.length}</td>
+                <td>{room.users?room.users.length:0}</td>
                 <td>{room.status||'waiting...'}</td>
             </tr>
         )
@@ -93,7 +111,7 @@ const GamesList = ({roomsList, handleNewGame, handleUpdateRoomsList, handleJoinG
                     <th scope="col">Статус</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody onClick={onRoomsClick}>
                     <Rooms />
                 </tbody>
             </table>
@@ -122,7 +140,8 @@ WelcomeComponent.propTypes = {
     handleNewGame: PropTypes.func,
     handleUpdateRoomsList: PropTypes.func,
     handleJoinGame: PropTypes.func,
-    modal: PropTypes.object,
+    nameModal: PropTypes.object,
+    roomModal:  PropTypes.object,
 }
 
 WelcomeComponent.defaultProps = {
@@ -130,11 +149,19 @@ WelcomeComponent.defaultProps = {
     handleNewGame: ()=>{console.log('new game')},
     handleUpdateRoomsList: ()=>{console.log('update rooms list')},
     handleJoinGame: ()=>{console.log('join game')},
-    modal: {
+    nameModal: {
+        title: 'UserName title',
         isOpen: false,
-        handleSubmit: ()=>{console.log('modal submit')},
-        handleCancel: ()=>{console.log('modal cancel')},
-        handleChange: ()=>{console.log('modal change')},
+        handleSubmit: ()=>{console.log('nameModal submit')},
+        handleCancel: ()=>{console.log('nameModal cancel')},
+        handleChange: ()=>{console.log('nameModal change')},
+    },
+    roomModal: {
+        title: 'RoomName title',
+        isOpen: false,
+        handleSubmit: ()=>{console.log('roomModal submit')},
+        handleCancel: ()=>{console.log('roomModal cancel')},
+        handleChange: ()=>{console.log('roomModal change')},
     },
     roomsList: [{
         name: 'there are no rooms yet',

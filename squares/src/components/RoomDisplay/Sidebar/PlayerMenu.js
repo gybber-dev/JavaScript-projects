@@ -1,28 +1,43 @@
-import React, {useState} from 'react';
-import classes from './Sidebar.module.css'
-// import ReactDOM from 'react-dom';
-import Dice from './Dise/Dise';
+import React from 'react'
+import classes from './Sidebar.module.css';
+import PropTypes from 'prop-types';
 
 
-/*
-    props: {
-        player:{}
-    }
-*/
-console.log('run PlayerMenu');
-const PlayerMenu = (props)=>{
-    console.log('PlayerMenu', props);
-    const panelClasses = [classes.panel];
-    panelClasses.push(classes['panel-player']);
+console.log('run MainMenu');
 
-    const [info, setInfo] = useState(<div id={'info'}>{'Бросайте кости!'}</div>);   
-    console.log('info', info)
-    return (
-        <div className={panelClasses.join(' ')}>
-            {console.log('rendering...')}
-            <button className='btn btn-outline-secondary' onClick={()=>{setInfo(Dice())}}>Бросить кости</button>
-            {info}
+const PlayerMenu = ({userName, roomName, playerList}) =>{
+    const cellClasses = [classes.main];
+
+    // add new class
+    cellClasses.push(classes.option)
+    const PlayerList = playerList.map((player, index)=>{
+        return <li key={player+index}>{player}</li>
+    })
+        return (
+        <div className={cellClasses.join(' ')}>
+            <div>
+                <p textAlign='center'>{userName}</p>
+                <p>Room name: {roomName}</p>
+                <div>Players: {PlayerList}
+                    
+                </div>
+            </div>
         </div>
     )
 }
+
+
+PlayerMenu.propTypes = {
+    userName: PropTypes.string,
+    roomName: PropTypes.string,
+    playerList: PropTypes.array,
+}
+
+PlayerMenu.defaultProps = {
+    userName: '...name',
+    roomName: '...roomName',
+    playerList: ['user0', 'user1'],
+}
+
+
 export default PlayerMenu

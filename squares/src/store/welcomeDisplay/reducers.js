@@ -1,9 +1,11 @@
 import defaultState from '../store';
 import {
-    WELCOME_SHOW_MODAL,
+    WELCOME_SHOW_MODAL_USER,
     WELCOME_CHANGE_INPUT_VALUE,
     WELCOME_CHANGE_USER_NAME,
-    WELCOME_GET_ROOMS_LIST
+    WELCOME_GET_ROOMS_LIST,
+    WELCOME_SHOW_MODAL_ROOM,
+    WELCOME_SET_ROOM_NAME
 } from './actions'
 
 
@@ -16,7 +18,7 @@ export const welcomeWindowReducer = (state = defaultState, action) =>{
                 ...state,
                 userName: action.payload
             };
-        case WELCOME_SHOW_MODAL:
+        case WELCOME_SHOW_MODAL_USER:
             console.log('modal changed');
             return {
                 ...state,
@@ -34,7 +36,18 @@ export const welcomeWindowReducer = (state = defaultState, action) =>{
                 ...state,
                 roomsList: action.payload
             }
-
+        case WELCOME_SHOW_MODAL_ROOM:
+            console.log('modal changed');
+            return {
+                ...state,
+                roomModalShown: action.payload
+            }
+        case WELCOME_SET_ROOM_NAME:
+            console.log('modal is named');
+            return {
+                ...state,
+                roomName: action.payload
+            }
 
     }
 
