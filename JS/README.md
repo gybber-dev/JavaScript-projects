@@ -19,7 +19,7 @@
 
 <a name="auto"></a>
 <details>
-<summary>Работа со скриптом</summary>
+<summary>Работа со скриптом</summary></br>
 	<img src="./img/11.gif" alt="auto" width="1352" height="750"/>
 </details>
 
@@ -34,12 +34,26 @@
 
 <a name="additional"></a>
 <details>
-<summary>Расширение функционала</summary>
+<summary>Расширение функционала</summary></br>
 
 	На базе описанного выше проекта затем были созданы ряд менее значительных, как, например, подобный парсер параметров товара:
 <a name="parser"></a>
 <details>
 <summary>Парсер параметров товара для конкретного сайта</summary>
 	<img src="./img/UI.gif" alt="parser" width="1352" height="750"/>
+</details>
+</details>
+
+<a name="parser"></a>
+<details>
+<summary>Рекомендации с предыдущего места работы</summary></br>
+
+
+Благодарю своих руководителей за положительную оценку моих трудов. Для получения контактов прошу писать в личку.
+
+<a name="recommendation"></a>
+<details>
+<summary>Recommendation</summary>
+	<img src="./img/recommendation.jpg" alt="recommendation" width="500" height="700"/>
 </details>
 </details>
