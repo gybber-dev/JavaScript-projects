@@ -1,0 +1,12 @@
+{
+  "name": "react_basis",
+  "version": "1.0.0",
+  "description": "Working on react basis using the [source](https://metanit.com/web/react/1.1.php)",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
